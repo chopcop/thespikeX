@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>Con cặc</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/element-ui@2.15.7/lib/index.js"></script>
+
+    <style>
+body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .ayimgui {
+            position: fixed;
+            width: 360px;
+            height: 320px;
+            top: calc(50% - 180px);
+            left: calc(50% - 180px);
+            z-index: 999;
+            background-color: #e5f8ed;
+            /* border-radius: 8px; */
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .onlyTitle {
+            height: 21px !important;
+        }
+
+        .ayimgui .aytitle {
+            padding: 0 5px;
+            font-size: 16px;
+            background-color: #76c0e0;
+        }
+
+        .ayimgui .aytitle .titleClose {
+            position: absolute;
+            top: 3px;
+            right: 6px;
+            color: #000;
+        }
+
+        .ayimgui .aytitle .titleClose:hover {
+            color: #eb9797;
+        }
+
+        .ayimgui .aybody {
+            padding: 15px;
+            height: calc(100% - 21px - 15px - 15px);
+            overflow: auto;
+            font-size: 14px;
+        }
+
+
+        .aytext {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: #000;
+            text-align: center;
+            background: linear-gradient(80deg, #ff0000, #ff4800, #eeff00, #1cff08, #01ffb3, #0051ff, #a200ff, #e100ff, #ff0080, #ff0055, #ff0022);
+            background-size: 120%;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            animation: animate 2s linear infinite;
+        }
+
+
+        .el-radio {
+            margin: 8px 0;
+        }
+
+        .el-radio__label {
+            color: #000;
+        }
+
+        .el-radio__input.is-checked+.el-radio__label {
+            color: #000000;
+        }
+
+        .el-radio__inner {
+            background-color: rgb(254, 254, 254);
+            border: none;
+        }
+
+        .el-radio__input.is-checked .el-radio__inner {
+            background-color: rgb(254, 254, 254);
+        }
+
+        .el-radio__inner::after {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(0,0,0);
+        }
+
+        .onlySelect {
+            background-color: rgb(254, 254, 254);
+            border: none;
+        }
+
+        .onlySelect .el-select-dropdown__item {
+            color: #000;
+
+        }
+
+        .onlySelect .el-select-dropdown__item.hover,
+        .el-select-dropdown__item:hover:hover {
+            background-color: transparent;
+        }
+
+        .onlySelect .popper__arrow {
+            border-bottom-color: rgb(254, 254, 254) !important;
+        }
+
+        .onlySelect.el-popper[x-placement^=bottom] .popper__arrow::after {
+            border-bottom-color: rgb(8254, 254, 254) !important;
+        }
+
+        .el-select {
+            width: 100%;
+        }
+
+        .el-select .el-input {
+            background-color: rgb(254, 254, 254);
+        }
+
+        .el-select .el-input__suffix {
+            background-color: rgb(255,255,255);
+            color: #000;
+            right: 0;
+        }
+
+        .el-select .el-select__caret {
+            color: #000;
+        }
+
+        .el-select .el-input__inner {
+            background-color: transparent;
+            border: none;
+            color: #000;
+        }
+
+        .el-select .el-input .el-select__caret {
+            color: #000;
+        }
+
+        /* 解决ios下拉需要点两次 */
+        .el-scrollbar .el-scrollbar__bar {
+            opacity: 1 !important;
+        }
+
+        .el-button {
+            font-size: 14px;
+            padding: 5px 10px;
+            line-height: 14px;
+            color: #000;
+            background-color: #FFFFFF;
+        }
+
+        .el-button:hover {
+            opacity: .7;
+            color: #000;
+            background-color: #000000;
+        }
+
+        .el-button:focus,
+        .el-button:hover {
+            color: #000;
+            background-color: #000000;
+        }
+
+        .aycollapse {
+            width: 100%;
+            font-size: 14px;
+            background-color: rgb(217, 212, 212);
+            color: #000;
+        }
+
+        .aytab {
+            width: 100%;
+            height: 20px;
+            display: flex;
+            border-bottom: 2px solid rgb(198, 191, 191);
+        }
+
+        .aytab span {
+            padding: 0 5px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(255,255,255);
+            color: #000;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 10px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+        }
+
+
+        .el-input input {
+            background-color: rgb(232, 227, 227);
+            border: none;
+            border-radius: 0px;
+        }
+        button {
+            width: 75%;
+            height: 25px;
+            text-size-adjust: 7px;
+            background-color: #f6f8f5f1;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            border: 2px solid #b6ebb9;
+            border-radius: 20px;
+            padding: 0px 8px;
+            margin: 3px 40px;
+            font-size: 17px;
+            background: linear-gradient(80deg, #ff0000, #ff4800, #eeff00, #ef69dd, #dfd439, #d7647b, #a200ff, #e100ff, #ff0080, #ff0055, #ff0022);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            animation: animate 2s linear infinite;
+        }
+        @keyframes animate {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        button:active {
+            transform: translateY(3px);
+        }
+    </style>
+     <script type=”text/JavaScript”>
+        function killCopy(e){ 
+            return false } 
+        function reEnable(){ 
+            return true } 
+        document.onselectstart = new Function (“return false”) 
+        
+        if (window.sidebar){  
+            document.onmousedown=killCopy 
+            document.onclick=reEnable 
+        }
+    </script>
+
+<script language="JavaScript">
+    window.onload = function() {
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+        document.addEventListener("keydown", function(e) {
+            //document.onkeydown = function(e) {
+            // "I" key
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                disabledEvent(e);
+            }
+            // "J" key
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                disabledEvent(e);
+            }
+            // "S" key + macOS
+            if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                disabledEvent(e);
+            }
+            // "U" key
+            if (e.ctrlKey && e.keyCode == 85) {
+                disabledEvent(e);
+            }
+            // "F12" key
+            if (event.keyCode == 123) {
+                disabledEvent(e);
+            }
+        }, false);
+
+        function disabledEvent(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
+            e.preventDefault();
+            return false;
+        }
+    };
+</script>
+</header>
+
+<body>
+    <div id="app">
+        <div class="ayimgui" ref="menuMain">
+            <div class="aytitle" @touchstart="titleTouchStart" @touchmove="titleTouchMove">
+                <i :class="ifshow?'el-icon-caret-bottom':'el-icon-caret-top'" @click="ifshow = !ifshow"></i>
+                <span class="title-age">The Spike Ver 3.5.5</span>
+                <i class="titleClose el-icon el-icon-close" @click="closeimgui"></i>
+            </div>
+            <div class="aybody">
+                <div class="aytab">
+                    <span @click="changeTab('one')" :style="{background: tabValue==='one'?'#B1CEF0':'#BDC7D0'}">Roll nhân vật</span>
+                    <span @click="changeTab('two')" :style="{background: tabValue==='two'?'#B1CEF0':'#BDC7D0'}">Event</span>
+                    <span @click="changeTab('three')" :style="{background: tabValue==='three'?'#B1CEF0':'#BDC7D0'}">khác</span>
+                    <span @click="changeTab('four')" :style="{background: tabValue==='four'?'#B1CEF0':'#BDC7D0'}">Thông tin</span>
+                </div>
+                <div v-show="tabValue==='one'">
+                    <div class="aytext">
+                        <a href="https://www.tiktok.com/@gamehackios">Made With Love by TikTok: TipTip remake by vietlinh:))</a>
+                    </div>
+                    <div class="rollNV">
+                        <button @click="RollS()">Auto Roll S</button>
+<button @click="RollNhanh()"> Roll Nhanh OS</button>
+                        <button @click="ModNishi()">Nishikawa S+</button>
+                        <button @click="ModYamedera()">Yamedera</button>
+                        <button @click="ModSohee()">Sohee</button>
+                        <button @click="ModOasitv2()">Oasit V2</button>
+                        <button @click="ModIsabel()">Isabel</button>
+                        <button @click="ModNN()">NN</button>
+                        <button @click="ModRobert('h')">Robert</button>
+                    </div>
+                </div>
+                <div v-show="tabValue==='two'">
+                    <div class="aytext">
+                        <a href="https://www.tiktok.com/@gamehackios">Made With Love by TikTok: TipTip</a>
+                    </div>
+                    <div class="rollNV">
+                        <button @click="Unban(this)"> Unban All Code 🗽</button>
+                        <button @click="rollFree()">Roll event free V1</button>
+                        <button @click="rollFree2()">Roll,Mua free V2</button>
+                        <button @click="modHuyHieuXanh()">Mod hh Xanh 👙</button>
+                    
+    <button @click="modHuyHieuXanh1()">Mod hh Xanh  🖕</button>  <button @click="restoreOriginalValue1()"> Trả Về Giá Trị Cũ </button>
+    
+                        <div class="aytext">
+                        <a href="https://www.tiktok.com/@gamehackios"> Trên Ko đc thì sài dưới</a>
+                    </div>
+  <button @click="modHuyHieuXanh2()">Mod hh Xanh ✌️ </button>  <button @click="restoreOriginalValue2()">Trả Về Giá Trị Cũ </button>
+  </div>
+  </div>
+                <div v-show="tabValue==='three'">
+                    <div class="aytext">
+                        <a href="https://www.tiktok.com/@gamehackios">Made With Love by TikTok: TipTip</a>
+                    </div>
+                    <button @click="Makei64()">Tìm kiếm,thay thế (i4)</button>
+                    <button @click="Makef64()">Tìm kiếm,thay thế (d)</button>
+
+                    <button @click="SanghyeonULT('14')">Sanghyeon ULT</button>
+                    <button @click="ModCamCao()">Cam cao</button>
+                    <button @click="ModStyle()">Đổi màu style Nishi </button>
+
+                </div>
+                <div v-show="tabValue==='four'">
+                    <div class="aytext">
+                        <a href="#">Made With Love by TikTok: TipTip</a>
+                    </div>
+                    <a href="https://t.me/gamemodios"><button>Telegram TipTip</button></a>
+                    <a href="https://tiptipios.github.io/tiptip/gamehack"><button>Webstie: TipTip</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script> 
+	var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    ifshow: true,
+                    checked: false,
+                    radio: '1',
+                    activeSelect: '',
+                    selectOption: [{
+                        value: '0%', //实际内容
+                        label: '0%'//显示文案
+                    }, {
+                        value: '50%',
+                        label: '50%'
+                    }, {
+                        value: '100%',
+                        label: '100%'
+                    }],
+                    input: "",
+                    showOption: false,
+                    tabValue: "one",
+                }
+            },
+            mounted() {
+                this.setRect(360, 320);
+
+                //竖屏
+                var sWidth = window.screen.width; //屏幕宽
+                var sHeight = window.screen.height; //屏幕高
+
+                //全屏显示
+                if (window.screen.availWidth > window.screen.availHeight) {
+                    //横屏，宽高置换
+                    sWidth = window.screen.height; //屏幕宽
+                    sHeight = window.screen.width; //屏幕高
+                }
+                setWindowRect(0, 0, sWidth, sHeight);
+
+                setButtonAction(function () {
+                    var menu = document.querySelector("#app");
+                    if (menu.style.display == 'none') {
+                        menu.style.display = 'block';
+                        //显示菜单之后, 设置触控不可穿透悬浮窗口
+                        setWindowTouch(true);
+                    } else {
+                        menu.style.display = 'none';
+                        //隐藏菜单之后, 设置触控穿透悬浮窗口
+                        setWindowTouch(false);
+                    }
+                });
+            },
+            methods: {
+                setRect(w,
+                    h,
+                    x = -1,
+                    y = -1) {
+                    var boxW = w;
+                    var boxH = h;
+
+                    var ayMenu = this.$refs.menuMain;
+                    ayMenu.style.width = `${boxW}px`;
+                    ayMenu.style.height = `${boxH}px`;
+                    if (x == -1) ayMenu.style.left = `calc(50% - ${boxW / 2}px)`;
+                    if (y == -1) ayMenu.style.top = `calc(50% - ${boxH / 2}px)`;
+                },
+                titleTouchStart(event) {
+                    this.touchStartX = parseInt(event.touches[0].clientX);
+                    this.touchStartY = parseInt(event.touches[0].clientY);
+
+                    var ayMenu = this.$refs.menuMain;
+                    this.menuLastX = ayMenu.offsetLeft;
+                    this.menuLastY = ayMenu.offsetTop;
+                },
+                titleTouchMove(event) {
+                    event.preventDefault();
+                    var distanceX = event.touches[0].clientX - this.touchStartX;
+                    var distanceY = event.touches[0].clientY - this.touchStartY;
+					
+                    var ayMenu = this.$refs.menuMain;
+				},
+				
+				
+    function readI32(addr) {
+        return Number(h5gg.getValue(addr, "I32"));
+}
+
+function readF64(addr) {
+    return Number(h5gg.getValue(addr, "F64"));
+}
+
+function searchAndReplace(searchValue, replaceValue, valueType) {
+    h5gg.clearResults();
+    h5gg.searchNumber(searchValue, valueType, '0x100000000', '0x160000000');
+    var results = h5gg.getResults(h5gg.getResultsCount());
+
+    if (results.length === 0) {
+        alert("Không tìm thấy giá trị cần thay thế.");
+        return;
+    }
+
+    for (var i = 0; i < results.length; i++) {
+        if (valueType === "I32") {
+            var read = readI32(results[i].address);
+        } else if (valueType === "F64") {
+            var read = readF64(results[i].address);
+        }
+
+        if (read === searchValue) {
+            h5gg.setValue(results[i].address, replaceValue.toString(), valueType);
+        }
+    }
+
+    alert("thay thế hoàn tất ");
+}
+
+function Unban() {
+    var searchValue = 357958400;
+    var replaceValue = 100;
+
+    h5gg.clearResults();
+    h5gg.searchNumber(searchValue, 'I32', '0x100000000', '0x160000000');
+    var results = h5gg.getResults(h5gg.getResultsCount());
+
+    var targetResult = results.find(result => result.address.endsWith("370")); // Tìm kết quả có offset kết thúc bằng 8F4
+
+    if (targetResult) {
+        h5gg.setValue(targetResult.address, replaceValue.toString(), 'I32'); // Thay đổi kết quả tìm được
+        alert("Đã thực hiện Anti ban!");
+    } else {
+        alert("Không tìm thấy kết quả phù hợp để thay đổi.");
+    }
+}
+    </script>
+</body>
+
+</html>
