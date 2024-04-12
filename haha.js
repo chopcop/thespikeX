@@ -77,7 +77,7 @@ var app = new Vue({
                     var distanceY = event.touches[0].clientY - this.touchStartY;
 					
                     var ayMenu = this.$refs.menuMain;
-				},	
+                },	
 function readI32(addr) {
     return Number(h5gg.getValue(addr, "I32"));
 }
